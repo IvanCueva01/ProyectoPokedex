@@ -3,7 +3,12 @@ import Header from "./components/Header";
 import SideNav from "./components/SideNav";
 import MainContent from "./components/MainContent";
 import { useEffect, useState } from "react";
-import { Category, Pokemon, PokemonResponse } from "./types";
+import {
+  CategoriesResponse,
+  Category,
+  Pokemon,
+  PokemonResponse,
+} from "./types";
 import useHttpData from "./hooks/useHttpData";
 
 const url = "https://pokeapi.co/api/v2/type/";
@@ -15,10 +20,10 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category>({
     name: "normal",
   });
-  //Peticion para obtener lo tipos de Pokemon(categorias)
-  const { data: categoriesResponse, loading: loadingCategories } = useHttpData<{
-    results: Category[];
-  }>(url);
+  // Petición para obtener los tipos de Pokémon (categorías)
+  const { data: categoriesResponse, loading: loadingCategories } =
+    useHttpData<CategoriesResponse>(url);
+  //Extarae los nombres de los tipos de los pokemón
   const categories = categoriesResponse?.results || [];
 
   //Peticion para obtener los Pokemons segun la categoria(tipo seleccionado)
